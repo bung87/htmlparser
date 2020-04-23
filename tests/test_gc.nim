@@ -6,7 +6,7 @@ test "test gc":
     # fix https://github.com/nim-lang/Nim/issues/13946
     var html = """
 <div>
-    <img src="something.png" />
+    <img src="something.png"/>
     Hello World
 </div>
 """

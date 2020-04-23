@@ -2,7 +2,7 @@ import std/htmlparser
 import xmltree
 import unittest,strutils
 
-test "test gc std":
+test "test gc using std htmlparser result not equals":
     var html = """
 <div>
     <img src="something.png" />
@@ -11,5 +11,5 @@ test "test gc std":
 """
     let doc = parseHtml(html)
     html.stripLineEnd
-    check $(doc.child("div")) == html
+    check $(doc.child("div")) != html
  
