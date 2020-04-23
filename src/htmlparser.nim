@@ -49,7 +49,7 @@
 ##
 ##     writeFile("output.html", $html)
 
-import strutils, streams, parsexml, xmltree, unicode, strtabs
+import strutils, streams, ./htmlparser/parsexml, ./htmlparser/xmltree, unicode, strtabs
 
 type
   HtmlTag* = enum  ## list of all supported HTML tags; order will always be
@@ -1914,14 +1914,14 @@ proc untilElementEnd(x: var XmlParser, result: XmlNode,
     of xmlElementStart, xmlElementOpen:
       result.addNode(parse(x, errors))
     of xmlElementEnd:
-      if cmpIgnoreCase(x.elemName, result.tag) != 0:
-        adderr(expected(x, result))
-        # this seems to do better match error corrections in browsers:
-        while x.kind in {xmlElementEnd, xmlWhitespace}:
-          if x.kind == xmlElementEnd and cmpIgnoreCase(x.elemName,
-              result.tag) == 0:
-            break
-          next(x)
+      # if cmpIgnoreCase(x.elemName, result.tag) != 0:
+      #   adderr(expected(x, result))
+      #   # this seems to do better match error corrections in browsers:
+      #   while x.kind in {xmlElementEnd, xmlWhitespace}:
+      #     if x.kind == xmlElementEnd and cmpIgnoreCase(x.elemName,
+      #         result.tag) == 0:
+      #       break
+      #     next(x)
       next(x)
       break
     of xmlEof:

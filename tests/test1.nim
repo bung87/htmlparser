@@ -5,14 +5,15 @@
 #
 # To run these tests, simply execute `nimble test`.
 
-import unittest,os,xmltree,strutils
+import unittest,os,strutils
 
-import htmlparser
-test "can add":
+import ./../ src / htmlparser
+import ./../ src / htmlparser / xmltree
+test "test demo.html":
   let expected = readFile("tests"  / "demo.expect.html")
   let html = parseHtml(readFile("tests"  / "demo.html") )
   var cleanHtml = ($(html.child("html")))
   cleanHtml.stripLineEnd
   var cleanExpected = ($expected)
   cleanExpected.stripLineEnd
-  check cleanHtml == cleanExpected 
+  check cleanHtml == cleanExpected
