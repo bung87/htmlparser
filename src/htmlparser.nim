@@ -214,8 +214,12 @@ const
     tagOl, tagP, tagPre, tagTable, tagUl, tagCenter, tagDir, tagIsindex,
     tagMenu, tagNoframes}
   SingleTags* = {tagArea, tagBase, tagBasefont,
-    tagBr, tagCol, tagFrame, tagHr, tagImg, tagIsindex,
-    tagLink, tagMeta, tagParam, tagWbr}
+    tagBr, tagCol,tagEmbed, tagFrame, tagHr, tagImg,
+    tagInput,tagSource,tagTrack,
+    tagIsindex, # obsolete HTML 4.01
+    tagLink, tagMeta, tagParam, tagWbr,
+    tagCommand,tagKeygen # obsolete html5
+    }
 
 proc allLower(s: string): bool =
   for c in s:
@@ -1914,14 +1918,6 @@ proc untilElementEnd(x: var XmlParser, result: XmlNode,
     of xmlElementStart, xmlElementOpen:
       result.addNode(parse(x, errors))
     of xmlElementEnd:
-      # if cmpIgnoreCase(x.elemName, result.tag) != 0:
-      #   adderr(expected(x, result))
-      #   # this seems to do better match error corrections in browsers:
-      #   while x.kind in {xmlElementEnd, xmlWhitespace}:
-      #     if x.kind == xmlElementEnd and cmpIgnoreCase(x.elemName,
-      #         result.tag) == 0:
-      #       break
-      #     next(x)
       next(x)
       break
     of xmlEof:

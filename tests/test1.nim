@@ -14,6 +14,7 @@ test "test demo.html":
   let html = parseHtml(readFile("tests"  / "demo.html") )
   var cleanHtml = ($(html.child("html")))
   cleanHtml.stripLineEnd
+  echo cleanHtml
   var cleanExpected = ($expected)
   cleanExpected.stripLineEnd
   check cleanHtml == cleanExpected
