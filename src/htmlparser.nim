@@ -1912,36 +1912,9 @@ proc untilElementEnd(x: var XmlParser, result: XmlNode,
   while true:
     case x.kind
     of xmlElementStart, xmlElementOpen:
-      case result.htmlTag
-      of tagP, tagInput, tagOption:
-        # some tags are common to have no ``</end>``, like ``<li>`` but
-        # allow ``<p>`` in `<dd>`, `<dt>` and ``<li>`` in next case
-        if htmlTag(x.elemName) in {tagLi, tagP, tagDt, tagDd, tagInput,
-                                   tagOption}:
-          adderr(expected(x, result))
-          break
-      of tagDd, tagDt, tagLi:
-        if htmlTag(x.elemName) in {tagLi, tagDt, tagDd, tagInput,
-                                   tagOption}:
-          adderr(expected(x, result))
-          break
-      of tagTd, tagTh:
-        if htmlTag(x.elemName) in {tagTr, tagTd, tagTh, tagTfoot, tagThead}:
-          adderr(expected(x, result))
-          break
-      of tagTr:
-        if htmlTag(x.elemName) == tagTr:
-          adderr(expected(x, result))
-          break
-      of tagOptgroup:
-        if htmlTag(x.elemName) in {tagOption, tagOptgroup}:
-          adderr(expected(x, result))
-          break
-      else: discard
       result.addNode(parse(x, errors))
     of xmlElementEnd:
       if cmpIgnoreCase(x.elemName, result.tag) != 0:
-        #echo "5; expected: ", result.htmltag, " ", x.elemName
         adderr(expected(x, result))
         # this seems to do better match error corrections in browsers:
         while x.kind in {xmlElementEnd, xmlWhitespace}:

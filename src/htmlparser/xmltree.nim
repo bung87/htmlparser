@@ -633,7 +633,7 @@ proc add*(result: var string, n: XmlNode, indent = 0, indWidth = 2,
         result.addEscapedAttr(val)
         result.add('"')
 
-    if n.len == 0:
+    if n.len == 0 and n.fTag notin ["textarea","progress","meter" ]:
       result.add(" />")
       return
 

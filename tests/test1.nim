@@ -5,8 +5,14 @@
 #
 # To run these tests, simply execute `nimble test`.
 
-import unittest
+import unittest,os,xmltree,strutils
 
 import htmlparser
 test "can add":
-  check add(5, 5) == 10
+  let expected = readFile("tests"  / "demo.expect.html")
+  let html = parseHtml(readFile("tests"  / "demo.html") )
+  var cleanHtml = ($(html.child("html")))
+  cleanHtml.stripLineEnd
+  var cleanExpected = ($expected)
+  cleanExpected.stripLineEnd
+  check cleanHtml == cleanExpected 
