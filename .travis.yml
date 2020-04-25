@@ -49,8 +49,5 @@ install:
   - choosenim $CHANNEL
 
 script:
-    - nimble install -y
-    - nimble install karax -y
-    - nimble tests
-    - nimble test_std
-    - nimble examples
+    # - nimble install -y
+    - nimble test
