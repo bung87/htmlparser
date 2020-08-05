@@ -1,7 +1,7 @@
 
 import ./../ src / htmlparser
 import ./../ src / htmlparser / xmltree
-import unittest,strutils
+import unittest
 
 test "test issue #14056 xmlparser removes significant white space":
   # https://github.com/nim-lang/Nim/issues/14056
