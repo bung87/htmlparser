@@ -1,4 +1,13 @@
-#### joe made this: http://goel.io/joe
+# Ignore all
+*
 
-#### nim ####
+# Unignore all with extensions
+!*.*
+# Unignore all dirs
+!*/
 nimcache/
+nimblecache/
+htmldocs/
+*.out
+*.exe
+.DS_Store

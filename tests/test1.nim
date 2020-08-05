@@ -1,9 +1,3 @@
-# This is just an example to get you started. You may wish to put all of your
-# tests into a single file, or separate them into multiple `test1`, `test2`
-# etc. files (better names are recommended, just make sure the name starts with
-# the letter 't').
-#
-# To run these tests, simply execute `nimble test`.
 
 import unittest,os,strutils
 
@@ -17,3 +11,32 @@ test "test demo.html":
   var cleanExpected = ($expected)
   cleanExpected.stripLineEnd
   check cleanHtml == cleanExpected
+
+test "test tag":
+  var a = newElement("firstTag")
+  a.add newElement("childTag")
+  check $a == """<firstTag>
+  <childTag>
+  </childTag>
+</firstTag>"""
+
+test "test mutation":
+  var f = newElement("myTag")
+  f.add newElement("first")
+  f.insert(newElement("second"), 0)
+  check $f[1] == """<first>
+</first>"""
+  check $f[0] == """<second>
+</second>"""
+
+# test "text":
+#   var
+#     a = newElement("firstTag")
+#     b = newText("my text")
+#     c = newComment("my comment")
+#     s = ""
+#   s.add(c)
+#   s.add(a)
+#   s.add(b)
+#   echo s
+#   assert s == "<!-- my comment --><firstTag>my text</firstTag>"
