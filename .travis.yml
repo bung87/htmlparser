@@ -9,23 +9,23 @@ matrix:
   include:
     # Build and test against the master (stable) and devel branches of Nim
     - os: linux
-      env: CHANNEL=devel
+      env: CHANNEL=stable
       compiler: gcc
 
     # On OSX we only test against clang (gcc is mapped to clang by default)
     - os: osx
-      env: CHANNEL=devel
+      env: CHANNEL=stable
       compiler: clang
 
     - os: windows
-      env: CHANNEL=devel
+      env: CHANNEL=stable
       compiler: gcc
 
 
   allow_failures:
     # Ignore failures when building against the devel Nim branch
     # Also ignore OSX, due to very long build queue
-    - os: osx
+    - os: windows
   fast_finish: true
 
 # BEGIN: Assuming you rely on external dependencies
